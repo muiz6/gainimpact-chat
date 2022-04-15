@@ -1,0 +1,28 @@
+{
+  "name": "app",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "12.1.5",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "@chakra-ui/react": "^1.8.6",
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "framer-motion": "^6.2.8"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "eslint-config-airbnb": "^19.0.0",
+    "eslint-config-next": "12.1.5",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react-hooks": "^4.3.0"
+  }
+}
