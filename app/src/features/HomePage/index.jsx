@@ -7,16 +7,18 @@ import ChatApp from './ChatApp';
 
 export default function HomePage() {
   const router = useRouter();
-  const [success, setSuccess] = useState();
+  const [response, setResponse] = useState(null);
   useEffect(() => {
     if (repository.isUserSignedIn()) {
-      setSuccess(true);
+      (async () => {
+        setResponse(await repository.getChatPg());
+      })();
     } else {
       router.push('/sign-up');
     }
   }, []);
-  return success
-    ? (<ChatApp />)
+  return response
+    ? (<ChatApp data={response} />)
     : (
       <Center h="100vh">
         <CircularProgress color="secondary" isIndeterminate />

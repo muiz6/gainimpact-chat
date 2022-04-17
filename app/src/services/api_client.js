@@ -1,9 +1,9 @@
 const BASE_URL = '/api';
 
-async function myFetch(endpoint, { body, method }) {
+async function myFetch(endpoint, { body, headers, method }) {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     method: method ?? 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...headers },
     body: JSON.stringify(body),
   });
   if (response.status < 200 || response.status > 299) {
@@ -23,5 +23,13 @@ export async function postUser(user) {
   return myFetch('/users', {
     method: 'POST',
     body: user,
+  });
+}
+
+export async function getChatPg(token) {
+  return myFetch('/chat_pg', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
 }

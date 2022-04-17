@@ -10,7 +10,7 @@ async function get(req, res, next) {
     users.forEach((u) => {
       const message = messages.find((m) => m.senderId === u.id || m.receiverId === u.id);
       if (message) {
-        u.lastAt = message.createdAt;
+        u.message = message;
       }
     });
 

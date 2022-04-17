@@ -16,3 +16,8 @@ export function isUserSignedIn() {
 export function signOut() {
   webStorage.deleteToken();
 }
+
+export function getChatPg() {
+  const token = webStorage.getToken();
+  return apiClient.getChatPg(token);
+}
