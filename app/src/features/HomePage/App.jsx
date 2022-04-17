@@ -13,7 +13,7 @@ export default function App() {
       <Flex w="350px" direction="column">
         <SideBar />
       </Flex>
-      <Box>
+      <Box px="60px" py="30px">
 
       </Box>
     </Flex>
