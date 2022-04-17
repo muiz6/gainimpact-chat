@@ -21,7 +21,7 @@ export default function SignInPage() {
             <FormInput placeholder="Enter your username" ref={refUsername} />
           </Box>
           <Box mb="22px">
-            <FormInput placeholder="Enter your password" ref={refPassword} />
+            <FormInput placeholder="Enter your password" ref={refPassword} type="password" />
           </Box>
           <MyButton onClick={() => onSignIn(refUsername, refPassword, router)}>Submit</MyButton>
         </chakra.form>

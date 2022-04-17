@@ -1,26 +1,16 @@
 import {
-  Box, Button, Flex, Image,
+  Box, Flex, Image, Button,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import React from 'react';
 
+import * as repository from 'services/repository';
 import svgs from 'svgs';
 import ProfileTile from './ProfileTile';
 import UserTile from './UserTile';
 
-export default function App() {
-  return (
-    <Flex h="100vh">
-      <Flex w="350px" direction="column">
-        <SideBar />
-      </Flex>
-      <Box px="60px" py="30px">
-
-      </Box>
-    </Flex>
-  );
-}
-
-function SideBar() {
+export default function SideBar() {
+  const router = useRouter();
   return (
     <>
       <Box bgColor="primary" borderBottomRadius="14px" mb="2.5" pb="26px" pt="35px" px="30px">
@@ -36,11 +26,20 @@ function SideBar() {
           </Box>
         </Box>
         <Box pb="21px" pt="23px" px="15px" borderTop="1px solid #D0D9DF">
-          <Button bgColor="transparent" _hover={{ bgColor: 'none' }}>
+          <Button
+            bgColor="transparent"
+            onClick={() => onSignOut(router)}
+            _hover={{ bgColor: 'none' }}
+          >
             <Image src={svgs.signOut} />
           </Button>
         </Box>
       </Flex>
     </>
   );
+}
+
+function onSignOut(router) {
+  repository.signOut();
+  router.replace('/sign-up');
 }

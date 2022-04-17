@@ -6,7 +6,7 @@ async function myFetch(endpoint, { body, method }) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
-  if (response.status !== 200) {
+  if (response.status < 200 || response.status > 299) {
     throw response.statusText;
   }
   return response.json();

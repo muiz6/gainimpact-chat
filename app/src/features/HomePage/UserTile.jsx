@@ -11,6 +11,7 @@ export default function UserTile({
       borderRadius="14px"
       boxShadow={active ? '0px 8px 40px rgba(0, 72, 251, 0.3)' : ''}
       color={active ? 'onSecondary' : ''}
+      cursor="pointer"
     >
       <Box>
         <Box bgColor="gray.400" border="2px solid #F3BA4A" borderRadius="50%" h="44px" w="44px" />
