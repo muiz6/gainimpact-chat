@@ -35,4 +35,11 @@ async function readUser(userIdOrEmailOrUsername) {
   return users[0];
 }
 
-module.exports = { createUser, readUser };
+async function readUsers() {
+  await createTable();
+  const query = 'SELECT * FROM users;';
+  const [result] = await dbPool.promise().execute(query);
+  return result;
+}
+
+module.exports = { createUser, readUser, readUsers };

@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 
+const chatPgRouter = require('./routes/chat_pg');
 const userRouter = require('./routes/users');
 
 const PORT = 5000;
@@ -13,6 +14,7 @@ app.get('/', (_, res) => {
   res.json({ message: 'Welcome to Gainimpact chat server.' });
 });
 
+app.use('/chat_pg', chatPgRouter);
 app.use('/users', userRouter);
 
 app.use((err, req, res, next) => {
