@@ -10,7 +10,7 @@ export default function MessageGroup({ messages, name, self }) {
 
 function SelfMessages({ messages, name }) {
   return (
-    <>
+    <Box>
       <Text fontSize="xs" fontWeight="600" mb="9px">{name}</Text>
       <Flex pb="5">
         <Box>
@@ -18,19 +18,26 @@ function SelfMessages({ messages, name }) {
         </Box>
         <Box ml="2.5">
           {messages.map((message) => (
-            <Box bgColor="primary" borderRadius="0px 14px 14px 14px" mb="2.5" px="5" pt="4" pb="14px">
+            <Box
+              bgColor="primary"
+              borderRadius="0px 14px 14px 14px"
+              mb="2.5"
+              px="5"
+              pt="4"
+              pb="14px"
+            >
               <Text fontSize="xs">{message.body}</Text>
             </Box>
           ))}
         </Box>
       </Flex>
-    </>
+    </Box>
   );
 }
 
 function OtherMessages({ messages, name }) {
   return (
-    <>
+    <Box>
       <Text fontSize="xs" fontWeight="600" mb="9px" textAlign="right">{name}</Text>
       <Flex direction="row-reverse" pb="5">
         <Box>
@@ -38,12 +45,19 @@ function OtherMessages({ messages, name }) {
         </Box>
         <Box mr="2.5">
           {messages.map((message) => (
-            <Box bgColor="#F3BA4A" borderRadius="14px 0px 14px 14px" mb="2.5" px="5" pt="4" pb="14px">
+            <Box
+              bgColor="#F3BA4A"
+              borderRadius="14px 0px 14px 14px"
+              mb="2.5"
+              px="5"
+              pt="4"
+              pb="14px"
+            >
               <Text fontSize="xs">{message.body}</Text>
             </Box>
           ))}
         </Box>
       </Flex>
-    </>
+    </Box>
   );
 }

@@ -30,7 +30,7 @@ async function readMessages(user1, user2) {
 
 async function readLatestMessages(userId) {
   await createTable();
-  const query = 'SELECT * FROM messages WHERE senderId=? OR receiverId=? ORDER BY createdAT DESC;';
+  const query = 'SELECT * FROM messages WHERE senderId=? OR receiverId=? ORDER BY createdAt DESC;';
   const [result] = await dbPool.promise().execute(query, [userId, userId]);
   return result;
 }

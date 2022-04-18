@@ -2,16 +2,16 @@ import {
   Box, Flex, Image, Button,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 
-import * as repository from 'services/repository';
 import svgs from 'svgs';
 import ProfileTile from './ProfileTile';
 import UserTile from './UserTile';
 
-export default function SideBar({ profile, users }) {
+export default function SideBar({
+  profile, users, selectedUser, onSelectUser, onSignOut,
+}) {
   const router = useRouter();
-  const [active, setActive] = useState(0);
   return (
     <>
       <Box bgColor="primary" borderBottomRadius="14px" mb="2.5" pb="26px" pt="35px" px="30px">
@@ -20,12 +20,12 @@ export default function SideBar({ profile, users }) {
       <Flex bgColor="primary" flexDir="column" flexGrow="1" borderTopRadius="14px">
         <Box flexGrow="1" px="5" py="14px">
           {
-            users.map((user, index) => (
+            users.map((user) => (
               <Box py="2.5">
                 <UserTile
-                  active={active === index}
+                  active={user.id === selectedUser}
                   date={new Date(Date.parse(user?.message.createdAt))}
-                  onClick={() => setActive(index)}
+                  onClick={() => onSelectUser(user.id)}
                   subtitle={user?.message.body}
                   title={user.name}
                 />
@@ -45,9 +45,4 @@ export default function SideBar({ profile, users }) {
       </Flex>
     </>
   );
-}
-
-function onSignOut(router) {
-  repository.signOut();
-  router.replace('/sign-up');
 }

@@ -8,10 +8,10 @@ export default function ChatApp({ data }) {
   return (
     <Flex h="100vh">
       <Flex w="350px" direction="column">
-        <SideBar profile={data.profile} users={data.users} />
+        <SideBar profile={data.profile} users={data.users} selectedUser={data.chat.selectedUser} />
       </Flex>
       <Box flexGrow="1" px="60px" py="30px">
-        <MessageBox messages={data?.users[0].messages ?? []} />
+        <MessageBox chat={data.chat} />
       </Box>
     </Flex>
   );
