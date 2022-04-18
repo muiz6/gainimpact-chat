@@ -17,14 +17,14 @@ export function getChatDataObservable(otherUserId) {
   }
   if (!chatTree) {
     repository.getChatPg().then((value) => {
-      chatTree = formatChatData(value);
+      chatTree = formatChatPgData(value);
       subject.next(chatTree);
     });
   }
   return subject;
 }
 
-function formatChatData(data, selectedUserId) {
+function formatChatPgData(data, selectedUserId) {
   const formattedData = {
     profile: data.profile,
     users: data.users,
@@ -34,25 +34,32 @@ function formatChatData(data, selectedUserId) {
   };
   const messages = data.users[0]?.messages;
   if (messages) {
-    const dates = [];
-    messages.forEach((m) => {
-      const createdAt = new Date(Date.parse(m.createdAt));
-      const dateGroup = dates.find((d) => d.date.getDate() - createdAt.getDate() === 0);
-      if (dateGroup) {
-        dateGroup.messageGroups.push(m);
-      } else {
-        dates.push({ date: createdAt, messageGroups: [m] });
-      }
-    });
-
-    dates.forEach((d) => {
-      d.messageGroups = formatMessages(d.messageGroups, [data.profile, ...data.users],
-        data.profile.id);
-    });
-
-    formattedData.chat.dates = dates;
+    formattedData.chat.dates = formatChat(messages, data);
   }
   return formattedData;
+}
+
+function formatChat(messages, data) {
+  const dates = [];
+  messages.forEach((m) => {
+    const createdAt = new Date(Date.parse(m.createdAt));
+    const dateGroup = dates.find((d) => d.date.getDate() - createdAt.getDate() === 0);
+    if (dateGroup) {
+      dateGroup.messageGroups.push(m);
+    } else {
+      dates.push({ date: createdAt, messageGroups: [m] });
+    }
+  });
+
+  dates.forEach((d) => {
+    d.messageGroups = formatMessages(
+      d.messageGroups,
+      [data.profile, ...data.users],
+      data.profile.id,
+    );
+  });
+
+  return dates;
 }
 
 function formatMessages(messages, users, selfId) {
@@ -63,6 +70,7 @@ function formatMessages(messages, users, selfId) {
       const lastGroup = messageGroups[messageGroups.length - 1];
       lastGroup.messages.push(m);
     } else {
+      userId = m.senderId;
       const { name } = users.find((u) => u.id === m.senderId);
       messageGroups.push({ messages: [m], name, self: m.senderId === selfId });
     }
@@ -72,7 +80,12 @@ function formatMessages(messages, users, selfId) {
 
 export function selectUser(userId) {
   chatTree.chat.selectedUser = userId;
+  chatTree.chat.dates = [];
   subject.next(chatTree);
+  repository.getMessages(userId).then((value) => {
+    chatTree.chat.dates = formatChat(value, chatTree);
+    subject.next(chatTree);
+  });
 }
 
 export function dispose() { }

@@ -5,13 +5,13 @@ import { formatDate } from 'util';
 
 export default function DateGroup({ children, date }) {
   return (
-    <>
+    <Box>
       <Center>
         <Box bgColor="secondary" borderRadius="14px" color="onSecondary" py="1" px="5">
           <Text fontSize="xs">{formatDate(date)}</Text>
         </Box>
       </Center>
       {children}
-    </>
+    </Box>
   );
 }

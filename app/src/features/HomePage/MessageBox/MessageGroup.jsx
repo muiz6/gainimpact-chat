@@ -16,7 +16,7 @@ function SelfMessages({ messages, name }) {
         <Box>
           <Box bgColor="gray.400" border="2px solid #F3BA4A" borderRadius="50%" h="44px" w="44px" />
         </Box>
-        <Box ml="2.5">
+        <Flex flexDir="column-reverse" ml="2.5">
           {messages.map((message) => (
             <Box
               bgColor="primary"
@@ -29,7 +29,7 @@ function SelfMessages({ messages, name }) {
               <Text fontSize="xs">{message.body}</Text>
             </Box>
           ))}
-        </Box>
+        </Flex>
       </Flex>
     </Box>
   );

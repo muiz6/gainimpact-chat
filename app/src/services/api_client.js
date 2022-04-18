@@ -26,10 +26,14 @@ export async function postUser(user) {
   });
 }
 
-export async function getChatPg(token) {
+export function getChatPg(token) {
   return myFetch('/chat_pg', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+export function getMessages(token, userId) {
+  return myFetch(`/messages/${userId}`, {
+    headers: { Authorization: `Bearer ${token}` },
   });
 }

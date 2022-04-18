@@ -3,6 +3,7 @@ const express = require('express');
 
 const chatPgRouter = require('./routes/chat_pg');
 const userRouter = require('./routes/users');
+const messageRouter = require('./routes/messages');
 
 const PORT = 5000;
 const app = express();
@@ -16,6 +17,7 @@ app.get('/', (_, res) => {
 
 app.use('/chat_pg', chatPgRouter);
 app.use('/users', userRouter);
+app.use('/messages', messageRouter);
 
 app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Something went wrong!' });

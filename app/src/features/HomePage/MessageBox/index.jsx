@@ -8,7 +8,7 @@ import MessageGroup from './MessageGroup';
 export default function MessageBox({ chat }) {
   return (
     <Flex flexDirection="column" h="100%">
-      <Flex flexDirection="column" flexGrow="1" justifyContent="end" pb="2.5">
+      <Flex flexDirection="column-reverse" flexGrow="1" justifyContent="end" pb="2.5">
         {
           chat.dates.map((d) => (
             <DateGroup date={d.date}>

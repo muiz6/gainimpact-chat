@@ -21,3 +21,8 @@ export function getChatPg() {
   const token = webStorage.getToken();
   return apiClient.getChatPg(token);
 }
+
+export function getMessages(userId) {
+  const token = webStorage.getToken();
+  return apiClient.getMessages(token, userId);
+}
