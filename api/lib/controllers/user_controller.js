@@ -14,7 +14,7 @@ async function postUser(req, res, next) {
       return res.status(400).json({ message: 'All parameters are required' });
     }
 
-    const oldUser = await User.readUser(email);
+    const oldUser = await User.readUserByUsername(username);
     if (oldUser) {
       return res.status(409).json({ message: 'User Already Exists. Please Login' });
     }

@@ -18,7 +18,7 @@ export default function HomePage() {
         .subscribe((value) => setData({ ...value }));
       return () => subscription.unsubscribe();
     }
-    return router.push('/sign-up');
+    router.push('/sign-up');
   }, []);
 
   return data

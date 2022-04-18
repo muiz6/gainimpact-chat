@@ -12,7 +12,7 @@ export const { signOut } = repository;
 
 export function getChatDataObservable(otherUserId) {
   if (chatTree) {
-    if (chatTree.messages.selectedUser !== otherUserId) {
+    if (chatTree?.messages.selectedUser !== otherUserId) {
       chatTree.messages.selectedUser = otherUserId;
       subject.next(chatTree);
     }

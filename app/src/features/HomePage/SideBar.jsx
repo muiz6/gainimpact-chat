@@ -24,9 +24,9 @@ export default function SideBar({
               <Box py="2.5">
                 <UserTile
                   active={user.id === selectedUser}
-                  date={new Date(Date.parse(user?.message.createdAt))}
+                  date={new Date(Date.parse(user.message?.createdAt))}
                   onClick={() => onSelectUser(user.id)}
-                  subtitle={user?.message.body}
+                  subtitle={user.message?.body}
                   title={user.name}
                 />
               </Box>

@@ -19,7 +19,7 @@ export default function MessageBox({ chat }) {
         pb="2.5"
       >
         {
-          chat.dates.map((d) => (
+          chat.dates?.map((d) => (
             <DateGroup date={d.date}>
               <Flex flexDir="column-reverse">
                 {
