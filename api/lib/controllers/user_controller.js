@@ -45,7 +45,7 @@ async function postLogin(req, res, next) {
       return res.status(400).json({ message: '"username" and "password" are required' });
     }
 
-    const user = await User.readUser(username);
+    const user = await User.readUserByUsername(username);
     if (user && await bcrypt.compare(password, user.password)) {
       const token = jwt.sign(
         { userId: user.id },

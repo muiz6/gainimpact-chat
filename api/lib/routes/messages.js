@@ -7,6 +7,6 @@ const messageRouter = express.Router();
 
 messageRouter.get('/:userId', authMiddleware.verifyToken, messageController.getMessages);
 
-messageRouter.post('/', messageController.postMessage);
+messageRouter.post('/', authMiddleware.verifyToken, messageController.postMessage);
 
 module.exports = messageRouter;

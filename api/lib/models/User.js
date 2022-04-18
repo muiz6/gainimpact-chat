@@ -35,6 +35,13 @@ async function readUser(userIdOrEmailOrUsername) {
   return users[0];
 }
 
+async function readUserByUsername(username) {
+  await createTable();
+  const query = 'SELECT * FROM users WHERE username=?;';
+  const [users] = await dbPool.promise().execute(query, [username]);
+  return users[0];
+}
+
 async function readUsers() {
   await createTable();
   const query = 'SELECT * FROM users;';
@@ -42,4 +49,6 @@ async function readUsers() {
   return result;
 }
 
-module.exports = { createUser, readUser, readUsers };
+module.exports = {
+  createUser, readUser, readUserByUsername, readUsers,
+};

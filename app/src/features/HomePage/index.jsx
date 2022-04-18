@@ -11,16 +11,16 @@ import SideBar from './SideBar';
 export default function HomePage() {
   const router = useRouter();
   const [data, setData] = useState(null);
+
   useEffect(() => {
     if (viewmodel.isUserSignedIn()) {
-      viewmodel.getChatDataObservable().subscribe((value) => {
-        console.log(value);
-        setData({ ...value });
-      });
-    } else {
-      router.push('/sign-up');
+      const subscription = viewmodel.getChatDataObservable()
+        .subscribe((value) => setData({ ...value }));
+      return () => subscription.unsubscribe();
     }
+    return router.push('/sign-up');
   }, []);
+
   return data
     ? (
       <Flex h="100vh">
@@ -33,7 +33,7 @@ export default function HomePage() {
             onSignOut={() => onSignOut(router)}
           />
         </Flex>
-        <Box flexGrow="1" px="60px" py="30px">
+        <Box flexGrow="1">
           <MessageBox chat={data.chat} />
         </Box>
       </Flex>
